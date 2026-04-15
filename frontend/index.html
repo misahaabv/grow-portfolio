@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Groww Clone — Live stock portfolio dashboard tracking real-time NSE/BSE indices and Aakash Mehta's personal trading performance.">
+    <title>Groww — Live Dashboard</title>
+    <link rel="stylesheet" href="css/dashstyle.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Header -->
+    <header class="top-header">
+        <div class="header-left">
+            <a href="index.html" class="logo">
+                <img src="assets/Images/logolanding.svg" alt="Groww" width="40" height="40">
+            </a>
+            <nav class="main-nav">
+                <a href="#" class="active">Stocks</a>
+                <a href="#">F&amp;O</a>
+                <a href="#">Mutual Funds</a>
+            </nav>
+        </div>
+        <div class="header-center">
+            <div class="search-bar">
+                <span class="material-icons search-icon">search</span>
+                <input type="text" id="search-input" placeholder="Search Groww...">
+                <span class="search-shortcut">Ctrl+K</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <span class="material-icons icon-btn">notifications_none</span>
+            <div class="profile-container">
+                <div class="profile-icon" id="profile-toggle">
+                    <img src="https://ui-avatars.com/api/?name=Aakash+Mehta&background=6C63FF&color=fff" alt="Aakash Mehta">
+                </div>
+                <!-- Profile Dropdown -->
+                <div class="profile-dropdown" id="profile-dropdown">
+                    <div class="profile-header">
+                        <img src="https://ui-avatars.com/api/?name=Aakash+Mehta&background=6C63FF&color=fff" alt="Profile" width="45">
+                        <div class="profile-info">
+                            <h4>Aakash Mehta</h4>
+                            <p>NSE-registered Retail Investor</p>
+                            <span class="sebi-tag">SEBI Reg. INZ000XXXXX</span>
+                        </div>
+                    </div>
+                    <div class="profile-menu">
+                        <a href="#"><span class="material-icons">account_balance_wallet</span> Total Capital: ₹40,00,000</a>
+                        <a href="#"><span class="material-icons">trending_up</span> Overall ROI: ~219%</a>
+                        <a href="#"><span class="material-icons">settings</span> Settings</a>
+                        <a href="#"><span class="material-icons">help_outline</span> Help &amp; Support</a>
+                    </div>
+                    <div class="profile-logout">
+                        <a href="#" id="logout-btn"><span class="material-icons">logout</span> Log Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sub Navigation -->
+    <div class="sub-header-container">
+        <div class="sub-header">
+            <nav class="sub-nav" id="main-tabs">
+                <a href="#" class="active" data-target="view-explore">Explore</a>
+                <a href="#" data-target="view-holdings">Holdings</a>
+                <a href="#" data-target="view-positions">Positions</a>
+                <a href="#" data-target="view-orders">Orders</a>
+                <a href="#" data-target="view-watchlist">Watchlist</a>
+            </nav>
+            <div class="sub-actions">
+                <button class="terminal-btn" id="terminal-btn">
+                    <span class="material-icons">terminal</span>
+                    Terminal
+                </button>
+                <div class="wallet-balance">₹915</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Live Ticker Bar -->
+    <div class="ticker-bar" id="ticker-bar">
+        <div class="ticker-item"><span class="ticker-name">NIFTY</span><span class="ticker-val">Loading...</span></div>
+        <div class="ticker-item"><span class="ticker-name">SENSEX</span><span class="ticker-val">Loading...</span></div>
+        <div class="ticker-item"><span class="ticker-name">BANKNIFTY</span><span class="ticker-val">Loading...</span></div>
+        <div class="ticker-item"><span class="ticker-name">MIDCPNIFTY</span><span class="ticker-val">Loading...</span></div>
+        <div class="ticker-item"><span class="ticker-name">FINNIFTY</span><span class="ticker-val">Loading...</span></div>
+        <div class="ticker-live-badge">
+            <span class="live-dot"></span> LIVE
+        </div>
+    </div>
+
+    <main class="main-container">
+
+        <!-- ────────── EXPLORE TAB ────────── -->
+        <div id="view-explore" class="tab-content active">
+            <div class="content-split">
+                <div class="content-left">
+                    <div class="alert-box" id="market-alert">
+                        <div class="alert-info">
+                            <h3>Market Holiday on 14 April</h3>
+                            <p>Markets are closed on account of Ambedkar Jayanti and will open at 9:15 AM on 15 April.</p>
+                        </div>
+                        <div class="alert-icon">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3651/3651352.png" alt="Alert">
+                        </div>
+                        <span class="material-icons close-alert" id="close-alert">close</span>
+                    </div>
+
+                    <div class="section-header">
+                        <h2>Most traded stocks on Groww</h2>
+                        <span class="refresh-tag" id="last-refreshed">Refreshing every 10s</span>
+                    </div>
+
+                    <div class="stocks-grid" id="stocks-grid">
+                        <!-- Injected by dashboard.js -->
+                    </div>
+                </div>
+
+                <div class="content-right">
+                    <!-- Portfolio Summary -->
+                    <div class="widget">
+                        <h3 class="widget-title">
+                            <span class="material-icons widget-icon">analytics</span>
+                            Portfolio Summary
+                        </h3>
+                        <div class="portfolio-summary">
+                            <div class="summary-row"><span>Total Capital</span><span>₹40,00,000</span></div>
+                            <div class="summary-row"><span>Equity Deployed</span><span>₹5,00,000</span></div>
+                            <div class="summary-row"><span>F&amp;O Deployed</span><span>₹10,00,000</span></div>
+                            <div class="summary-row"><span>Active Period</span><span>Jan 2020 – Dec 2023</span></div>
+                            <hr class="summary-divider">
+                            <div class="summary-row positive"><span>Equity Returns</span><span>+₹7,83,400</span></div>
+                            <div class="summary-row positive"><span>F&amp;O Returns</span><span>+₹1,18,72,000</span></div>
+                            <hr class="summary-divider">
+                            <div class="summary-row highlight"><span>Total ROI</span><span>~219% (CAGR 34.2%)</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Products & Tools -->
+                    <div class="widget">
+                        <h3 class="widget-title">
+                            <span class="material-icons widget-icon">build</span>
+                            Products &amp; Tools
+                        </h3>
+                        <div class="tool-item">
+                            <div class="tool-info">
+                                <span class="material-icons tool-icon">campaign</span>
+                                <span class="tool-name">IPO</span>
+                            </div>
+                            <span class="tool-status">0 open</span>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-info">
+                                <span class="material-icons tool-icon" style="color:#7b809a">bar_chart</span>
+                                <span class="tool-name">Screener</span>
+                            </div>
+                            <span class="tool-arrow material-icons">arrow_forward_ios</span>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-info">
+                                <span class="material-icons tool-icon" style="color:#7b809a">show_chart</span>
+                                <span class="tool-name">F&amp;O — Futures &amp; Options</span>
+                            </div>
+                            <span class="tool-arrow material-icons">arrow_forward_ios</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ────────── HOLDINGS TAB ────────── -->
+        <div id="view-holdings" class="tab-content">
+            <div class="section-header">
+                <div>
+                    <h2>Equity Holdings (2020–2021)</h2>
+                    <p class="section-subtitle">12 large-cap &amp; mid-cap stocks across NSE. Total invested: ₹5,35,350.</p>
+                </div>
+                <div class="summary-pills">
+                    <span class="pill positive">Total P&amp;L: +₹7,83,400</span>
+                    <span class="pill">CAGR: ~24.9%</span>
+                </div>
+            </div>
+            <div class="table-container">
+                <table class="data-table" id="holdings-table">
+                    <thead>
+                        <tr>
+                            <th>Stock</th>
+                            <th>Sector</th>
+                            <th>Entry ₹</th>
+                            <th>Qty</th>
+                            <th>Investment ₹</th>
+                            <th>Exit ₹</th>
+                            <th>P&amp;L ₹</th>
+                            <th>Return %</th>
+                            <th>Period</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="stock-name-cell">Reliance Inds.</td><td>Energy/Retail</td><td>1,640</td><td>60</td><td>98,400</td><td>2,310</td><td class="positive">+40,200</td><td class="positive">+40.9%</td><td>14 mo</td></tr>
+                        <tr><td class="stock-name-cell">HDFC Bank</td><td>Banking</td><td>1,120</td><td>70</td><td>78,400</td><td>1,485</td><td class="positive">+25,550</td><td class="positive">+32.6%</td><td>18 mo</td></tr>
+                        <tr><td class="stock-name-cell">Infosys</td><td>IT</td><td>820</td><td>80</td><td>65,600</td><td>1,415</td><td class="positive">+47,600</td><td class="positive">+72.6%</td><td>20 mo</td></tr>
+                        <tr><td class="stock-name-cell">TCS</td><td>IT</td><td>2,050</td><td>25</td><td>51,250</td><td>3,120</td><td class="positive">+26,750</td><td class="positive">+52.2%</td><td>22 mo</td></tr>
+                        <tr><td class="stock-name-cell">Bharti Airtel</td><td>Telecom</td><td>535</td><td>90</td><td>48,150</td><td>695</td><td class="positive">+14,400</td><td class="positive">+29.9%</td><td>12 mo</td></tr>
+                        <tr><td class="stock-name-cell">Titan Company</td><td>Consumer</td><td>1,070</td><td>45</td><td>48,150</td><td>1,920</td><td class="positive">+38,250</td><td class="positive">+79.4%</td><td>19 mo</td></tr>
+                        <tr><td class="stock-name-cell">Bajaj Finance</td><td>NBFC</td><td>4,200</td><td>10</td><td>42,000</td><td>5,650</td><td class="positive">+14,500</td><td class="positive">+34.5%</td><td>16 mo</td></tr>
+                        <tr><td class="stock-name-cell">Asian Paints</td><td>Consumer</td><td>1,750</td><td>25</td><td>43,750</td><td>2,350</td><td class="positive">+15,000</td><td class="positive">+34.3%</td><td>15 mo</td></tr>
+                        <tr><td class="stock-name-cell">SBI</td><td>PSU Bank</td><td>285</td><td>120</td><td>34,200</td><td>410</td><td class="positive">+15,000</td><td class="positive">+43.9%</td><td>17 mo</td></tr>
+                        <tr><td class="stock-name-cell">Maruti Suzuki</td><td>Auto</td><td>6,850</td><td>6</td><td>41,100</td><td>7,940</td><td class="positive">+6,540</td><td class="positive">+15.9%</td><td>11 mo</td></tr>
+                        <tr><td class="stock-name-cell">Divi's Labs</td><td>Pharma</td><td>2,680</td><td>15</td><td>40,200</td><td>3,440</td><td class="positive">+11,400</td><td class="positive">+28.4%</td><td>13 mo</td></tr>
+                        <tr><td class="stock-name-cell">ICICI Bank</td><td>Banking</td><td>520</td><td>85</td><td>44,200</td><td>720</td><td class="positive">+17,000</td><td class="positive">+38.5%</td><td>15 mo</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ────────── POSITIONS TAB ────────── -->
+        <div id="view-positions" class="tab-content">
+            <div class="section-header">
+                <div>
+                    <h2>F&amp;O Monthly P&amp;L (2022–2023)</h2>
+                    <p class="section-subtitle">24 consecutive months of positive net P&amp;L. Win rate averaged 69.8%.</p>
+                </div>
+                <div class="summary-pills">
+                    <span class="pill positive">Cumulative Net: +₹64,49,800</span>
+                    <span class="pill">Capital: ₹10,00,000</span>
+                </div>
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Month</th>
+                            <th>Gross Profit ₹</th>
+                            <th>Gross Loss ₹</th>
+                            <th>Net P&amp;L ₹</th>
+                            <th>Brokerage ₹</th>
+                            <th>Net After Costs ₹</th>
+                            <th>Win Rate</th>
+                            <th>Cumulative ₹</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Jan 2022</td><td>2,68,000</td><td class="negative">-58,000</td><td class="positive">+2,10,000</td><td>9,400</td><td class="positive">+2,00,600</td><td><span class="winrate">71%</span></td><td>2,00,600</td></tr>
+                        <tr><td>Feb 2022</td><td>3,42,000</td><td class="negative">-72,000</td><td class="positive">+2,70,000</td><td>12,200</td><td class="positive">+2,57,800</td><td><span class="winrate">68%</span></td><td>4,58,400</td></tr>
+                        <tr><td>Mar 2022</td><td>4,18,000</td><td class="negative">-85,000</td><td class="positive">+3,33,000</td><td>14,600</td><td class="positive">+3,18,400</td><td><span class="winrate">73%</span></td><td>7,76,800</td></tr>
+                        <tr><td>Apr 2022</td><td>2,94,000</td><td class="negative">-63,000</td><td class="positive">+2,31,000</td><td>10,800</td><td class="positive">+2,20,200</td><td><span class="winrate">67%</span></td><td>9,97,000</td></tr>
+                        <tr><td>May 2022</td><td>1,62,000</td><td class="negative">-1,24,000</td><td class="positive">+38,000</td><td>8,200</td><td class="positive">+29,800</td><td><span class="winrate low">55%</span></td><td>10,26,800</td></tr>
+                        <tr><td>Jun 2022</td><td>1,48,000</td><td class="negative">-1,36,000</td><td class="positive">+12,000</td><td>7,600</td><td class="positive">+4,400</td><td><span class="winrate low">52%</span></td><td>10,31,200</td></tr>
+                        <tr><td>Jul 2022</td><td>3,28,000</td><td class="negative">-61,000</td><td class="positive">+2,67,000</td><td>12,400</td><td class="positive">+2,54,600</td><td><span class="winrate">74%</span></td><td>12,85,800</td></tr>
+                        <tr><td>Aug 2022</td><td>4,52,000</td><td class="negative">-78,000</td><td class="positive">+3,74,000</td><td>16,200</td><td class="positive">+3,57,800</td><td><span class="winrate high">76%</span></td><td>16,43,600</td></tr>
+                        <tr><td>Sep 2022</td><td>3,14,000</td><td class="negative">-68,000</td><td class="positive">+2,46,000</td><td>11,400</td><td class="positive">+2,34,600</td><td><span class="winrate">70%</span></td><td>18,78,200</td></tr>
+                        <tr><td>Oct 2022</td><td>2,84,000</td><td class="negative">-54,000</td><td class="positive">+2,30,000</td><td>9,800</td><td class="positive">+2,20,200</td><td><span class="winrate">69%</span></td><td>20,98,400</td></tr>
+                        <tr><td>Nov 2022</td><td>3,68,000</td><td class="negative">-72,000</td><td class="positive">+2,96,000</td><td>13,200</td><td class="positive">+2,82,800</td><td><span class="winrate">72%</span></td><td>23,81,200</td></tr>
+                        <tr><td>Dec 2022</td><td>2,24,000</td><td class="negative">-68,000</td><td class="positive">+1,56,000</td><td>8,800</td><td class="positive">+1,47,200</td><td><span class="winrate">66%</span></td><td>25,28,400</td></tr>
+                        <tr><td>Jan 2023</td><td>4,84,000</td><td class="negative">-82,000</td><td class="positive">+4,02,000</td><td>17,600</td><td class="positive">+3,84,400</td><td><span class="winrate high">77%</span></td><td>29,12,800</td></tr>
+                        <tr><td>Feb 2023</td><td>3,28,000</td><td class="negative">-74,000</td><td class="positive">+2,54,000</td><td>11,400</td><td class="positive">+2,42,600</td><td><span class="winrate">69%</span></td><td>31,55,400</td></tr>
+                        <tr><td>Mar 2023</td><td>2,14,000</td><td class="negative">-1,62,000</td><td class="positive">+52,000</td><td>7,200</td><td class="positive">+44,800</td><td><span class="winrate low">56%</span></td><td>32,00,200</td></tr>
+                        <tr><td>Apr 2023</td><td>5,14,000</td><td class="negative">-88,000</td><td class="positive">+4,26,000</td><td>18,800</td><td class="positive">+4,07,200</td><td><span class="winrate high">78%</span></td><td>36,07,400</td></tr>
+                        <tr><td>May 2023</td><td>3,84,000</td><td class="negative">-76,000</td><td class="positive">+3,08,000</td><td>13,600</td><td class="positive">+2,94,400</td><td><span class="winrate">73%</span></td><td>39,01,800</td></tr>
+                        <tr><td>Jun 2023</td><td>4,24,000</td><td class="negative">-64,000</td><td class="positive">+3,60,000</td><td>15,200</td><td class="positive">+3,44,800</td><td><span class="winrate high">76%</span></td><td>42,46,600</td></tr>
+                        <tr><td>Jul 2023</td><td>5,48,000</td><td class="negative">-94,000</td><td class="positive">+4,54,000</td><td>19,800</td><td class="positive">+4,34,200</td><td><span class="winrate high">79%</span></td><td>46,80,800</td></tr>
+                        <tr><td>Aug 2023</td><td>2,68,000</td><td class="negative">-1,18,000</td><td class="positive">+1,50,000</td><td>9,400</td><td class="positive">+1,40,600</td><td><span class="winrate low">60%</span></td><td>48,21,400</td></tr>
+                        <tr><td>Sep 2023</td><td>3,92,000</td><td class="negative">-82,000</td><td class="positive">+3,10,000</td><td>14,200</td><td class="positive">+2,95,800</td><td><span class="winrate">71%</span></td><td>51,17,200</td></tr>
+                        <tr><td>Oct 2023</td><td>4,62,000</td><td class="negative">-88,000</td><td class="positive">+3,74,000</td><td>16,600</td><td class="positive">+3,57,400</td><td><span class="winrate">74%</span></td><td>54,74,600</td></tr>
+                        <tr><td>Nov 2023</td><td>5,84,000</td><td class="negative">-1,04,000</td><td class="positive">+4,80,000</td><td>20,400</td><td class="positive">+4,59,600</td><td><span class="winrate high">77%</span></td><td>59,34,200</td></tr>
+                        <tr><td>Dec 2023</td><td>6,24,000</td><td class="negative">-86,000</td><td class="positive">+5,38,000</td><td>22,400</td><td class="positive">+5,15,600</td><td><span class="winrate high">79%</span></td><td>64,49,800</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ────────── ORDERS TAB ────────── -->
+        <div id="view-orders" class="tab-content">
+            <div class="section-header">
+                <div>
+                    <h2>Trade Log — Q1/Q2 2022</h2>
+                    <p class="section-subtitle">Representative F&amp;O executions on NSE via Zerodha. Brokerage: ₹20/order.</p>
+                </div>
+                <div class="summary-pills">
+                    <span class="pill positive">9 Wins</span>
+                    <span class="pill negative">3 Losses</span>
+                </div>
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Instrument</th>
+                            <th>Strategy</th>
+                            <th>Strike / Type</th>
+                            <th>Entry ₹</th>
+                            <th>Exit ₹</th>
+                            <th>Lots</th>
+                            <th>P&amp;L ₹</th>
+                            <th>Outcome</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>03-Jan-22</td><td>Nifty 50</td><td>Bull Call Spread</td><td>17000 CE / 17200 CE</td><td>85</td><td>147</td><td>4</td><td class="positive">+24,800</td><td><span class="outcome-badge win">Win</span></td></tr>
+                        <tr><td>10-Jan-22</td><td>Bank Nifty</td><td>Short Straddle</td><td>38000 CE+PE</td><td>420</td><td>210</td><td>2</td><td class="positive">+42,000</td><td><span class="outcome-badge win">Win</span></td></tr>
+                        <tr><td>17-Jan-22</td><td>Nifty 50</td><td>Long Put</td><td>17500 PE</td><td>145</td><td>88</td><td>3</td><td class="negative">-17,100</td><td><span class="outcome-badge loss">Loss</span></td></tr>
+                        <tr><td>24-Jan-22</td><td>Infosys</td><td>Long Call</td><td>1800 CE</td><td>62</td><td>105</td><td>2</td><td class="positive">+17,200</td><td><span class="outcome-badge win">Win</span></td></tr>
+                        <tr><td>07-Feb-22</td><td>Nifty 50</td><td>Iron Condor</td><td>17200 PE / 17800 CE</td><td>110</td><td>42</td><td>3</td><td class="positive">+30,600</td><td><span class="outcome-badge win">Win</span></td></tr>
+                        <tr><td>14-Feb-22</td><td>Bank Nifty</td><td>Bear Put Spread</td><td>39000 PE / 38500 PE</td><td>290</td><td>180</td><td>2</td><td class="negative">-22,000</td><td><span class="outcome-badge loss">Loss</span></td></tr>
+                        <tr><td>21-Feb-22</td><td>Nifty 50</td><td>Long Call</td><td>17600 CE</td><td>70</td><td>185</td><td>4</td><td class="positive">+92,000</td><td><span class="outcome-badge win">Win</span></td></tr>
+                        <tr><td>07-Mar-22</td><td>Bank Nifty</td><td>Short Strangle</td><td>38500 PE / 39500 CE</td><td>195</td><td>95</td><td>3</td><td class="positive">+45,000</td><td><span class="outcome-badge win">Win</span></td></tr>
+                        <tr><td>14-Mar-22</td><td>Nifty 50</td><td>Bull Call Spread</td><td>17000 CE / 17300 CE</td><td>120</td><td>210</td><td>3</td><td class="positive">+81,000</td><td><span class="outcome-badge win">Win</span></td></tr>
+                        <tr><td>21-Mar-22</td><td>HDFC Bank</td><td>Long Put</td><td>1500 PE</td><td>55</td><td>28</td><td>4</td><td class="negative">-21,600</td><td><span class="outcome-badge loss">Loss</span></td></tr>
+                        <tr><td>04-Apr-22</td><td>Nifty 50</td><td>Iron Fly</td><td>17500 ATM</td><td>180</td><td>85</td><td>2</td><td class="positive">+38,000</td><td><span class="outcome-badge win">Win</span></td></tr>
+                        <tr><td>11-Apr-22</td><td>Bank Nifty</td><td>Long Straddle</td><td>38000 ATM</td><td>380</td><td>520</td><td>2</td><td class="positive">+56,000</td><td><span class="outcome-badge win">Win</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ────────── WATCHLIST TAB ────────── -->
+        <div id="view-watchlist" class="tab-content">
+            <div class="empty-center">
+                <img src="https://cdn-icons-png.flaticon.com/512/4380/4380544.png" alt="Watchlist empty" width="140">
+                <h3>Your watchlist is empty</h3>
+                <p>Search for stocks above to add them here.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
