@@ -2,11 +2,13 @@ import { useState } from 'react';
 import Header from './components/Header';
 import SubHeader from './components/SubHeader';
 import TickerBar from './components/TickerBar';
+import Footer from './components/Footer';
 import ExploreTab from './components/tabs/ExploreTab';
 import HoldingsTab from './components/tabs/HoldingsTab';
 import PositionsTab from './components/tabs/PositionsTab';
 import OrdersTab from './components/tabs/OrdersTab';
 import WatchlistTab from './components/tabs/WatchlistTab';
+import SettingsTab from './components/tabs/SettingsTab';
 import { useLiveStocks } from './hooks/useLiveStocks';
 
 export default function App() {
@@ -25,40 +27,52 @@ export default function App() {
 
   return (
     <>
-      <Header />
-      <SubHeader activeTab={activeTab} onTabChange={setActiveTab} />
+      <Header onTabChange={setActiveTab} />
+      {/* Don't show SubHeader on settings page to match Groww UI */}
+      {activeTab !== 'settings' && (
+        <SubHeader activeTab={activeTab} onTabChange={setActiveTab} />
+      )}
       <TickerBar tickerData={tickerData} />
 
       <main className="main-container">
-        <div className={`tab-content ${activeTab === 'explore' ? 'active' : ''}`} id="view-explore">
-          <ExploreTab
-            mostTraded={mostTraded}
-            mtfStocks={mtfStocks}
-            intradayStocks={intradayStocks}
-            topGainers={topGainers}
-            topLosers={topLosers}
-            etfs={etfs}
-            allStocks={allStocks}
-            lastUpdated={lastUpdated}
-          />
-        </div>
+        {activeTab === 'settings' ? (
+          <SettingsTab />
+        ) : (
+          <>
+            <div className={`tab-content ${activeTab === 'explore' ? 'active' : ''}`} id="view-explore">
+              <ExploreTab
+                mostTraded={mostTraded}
+                mtfStocks={mtfStocks}
+                intradayStocks={intradayStocks}
+                topGainers={topGainers}
+                topLosers={topLosers}
+                etfs={etfs}
+                allStocks={allStocks}
+                lastUpdated={lastUpdated}
+              />
+            </div>
 
-        <div className={`tab-content ${activeTab === 'holdings' ? 'active' : ''}`} id="view-holdings">
-          <HoldingsTab />
-        </div>
+            <div className={`tab-content ${activeTab === 'holdings' ? 'active' : ''}`} id="view-holdings">
+              <HoldingsTab />
+            </div>
 
-        <div className={`tab-content ${activeTab === 'positions' ? 'active' : ''}`} id="view-positions">
-          <PositionsTab />
-        </div>
+            <div className={`tab-content ${activeTab === 'positions' ? 'active' : ''}`} id="view-positions">
+              <PositionsTab />
+            </div>
 
-        <div className={`tab-content ${activeTab === 'orders' ? 'active' : ''}`} id="view-orders">
-          <OrdersTab />
-        </div>
+            <div className={`tab-content ${activeTab === 'orders' ? 'active' : ''}`} id="view-orders">
+              <OrdersTab />
+            </div>
 
-        <div className={`tab-content ${activeTab === 'watchlist' ? 'active' : ''}`} id="view-watchlist">
-          <WatchlistTab />
-        </div>
+            <div className={`tab-content ${activeTab === 'watchlist' ? 'active' : ''}`} id="view-watchlist">
+              <WatchlistTab />
+            </div>
+          </>
+        )}
       </main>
+
+      <Footer />
     </>
   );
 }
+
