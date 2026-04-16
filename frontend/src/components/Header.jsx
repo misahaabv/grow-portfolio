@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import growwLogo from '../assets/groww-logo.png';
 
 export default function Header({ onTabChange }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -38,9 +39,7 @@ export default function Header({ onTabChange }) {
     <header className="top-header">
       <div className="header-left">
         <a href="/" className="logo">
-          <img src="https://assets-netstorage.groww.in/web-assets/billion_groww_desktop/prod/build/client/_next/static/media/growwLogo.8624b069.svg"
-               alt="Groww" width="40" height="40"
-               onError={(e) => { e.target.src = 'https://groww.in/favicon.ico'; }} />
+          <img src={growwLogo} alt="Groww" width="40" height="40" />
         </a>
         <nav className="main-nav">
           <a href="#" className="active" onClick={() => onTabChange('explore')}>Stocks</a>

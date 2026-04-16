@@ -399,11 +399,29 @@ body { background-color: #f7f8fb; color: #44475b; }
     border-bottom: 1px dotted #ccc;
     display: inline-block;
 }
-.social-icons { display: flex; gap: 16px; margin-bottom: 30px; }
-.social-icons a { color: #7b809a; transition: color 0.2s; }
-.social-icons a:hover { color: #6c63ff; }
-.app-links { display: flex; gap: 16px; }
-.app-links img { height: 36px; cursor: pointer; }
+.social-icons { display: flex; gap: 14px; margin-bottom: 30px; align-items: center; }
+.social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: #f0f1f5;
+    color: #555;
+    transition: background 0.2s, color 0.2s;
+}
+.social-icons a:hover { background: #6c63ff; color: #fff; }
+.social-icons a svg { display: block; }
+
+.app-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.app-links a {
+    display: block;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: opacity 0.2s, transform 0.2s;
+}
+.app-links a:hover { opacity: 0.85; transform: translateY(-2px); }
 
 .footer-links {
     display: flex;

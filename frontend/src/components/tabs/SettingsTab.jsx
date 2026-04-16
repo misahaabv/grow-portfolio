@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import growwLogo from '../../assets/groww-logo.png';
 
 const SIDEBAR_ITEMS = [
   { id: 'basic', label: 'Basic Details' },
@@ -101,9 +102,9 @@ export default function SettingsTab() {
         <section className="settings-section-card">
           <div className="section-header-row">
             <img
-              src="https://assets-netstorage.groww.in/web-assets/billion_groww_desktop/prod/build/client/_next/static/media/growwLogo.8624b069.svg"
+              src={growwLogo}
               alt=""
-              style={{ width: 22, filter: 'hue-rotate(160deg)' }}
+              style={{ width: 22 }}
             />
             <h3>Profit &amp; Loss</h3>
           </div>
