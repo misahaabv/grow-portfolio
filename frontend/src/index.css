@@ -285,3 +285,198 @@ body { background-color: #f7f8fb; color: #44475b; }
 .empty-center img { opacity: 0.7; }
 .empty-center h3 { font-size: 18px; color: #44475b; }
 .empty-center p { color: #7b809a; font-size: 14px; }
+
+/* ── Explore Two-Column Layout ── */
+.explore-layout { display: flex; gap: 28px; align-items: flex-start; }
+.explore-left { flex: 2; min-width: 0; }
+.explore-right { flex: 0 0 300px; min-width: 280px; position: sticky; top: 20px; }
+
+/* ── Explore Section ── */
+.explore-section { margin-bottom: 36px; }
+.section-title { font-size: 18px; font-weight: 600; color: #44475b; margin-bottom: 16px; }
+.see-more-link {
+  display: inline-flex; align-items: center; margin-top: 14px;
+  color: #6c63ff; font-size: 13px; font-weight: 600;
+  text-decoration: none; transition: opacity 0.15s;
+}
+.see-more-link:hover { opacity: 0.75; }
+
+/* ── Skeleton Cards ── */
+.skeleton-card { background: #fff; border: 1px solid #e8e9eb; border-radius: 10px; padding: 18px; min-height: 145px; }
+.skeleton-logo { width: 30px; height: 30px; border-radius: 6px; background: #f0f1f5; animation: shimmer 1.4s infinite; }
+.skeleton-text { height: 12px; border-radius: 4px; background: #f0f1f5; margin-top: 12px; animation: shimmer 1.4s infinite; }
+.skeleton-text.short { width: 60%; }
+@keyframes shimmer { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* ── Sector Movers ── */
+.movers-tabs { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.movers-tab {
+  padding: 7px 16px; border-radius: 20px; border: 1px solid #e8e9eb;
+  background: #fff; color: #44475b; font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: all 0.15s;
+}
+.movers-tab:hover { border-color: #6c63ff; color: #6c63ff; }
+.movers-tab.active { background: #44475b; color: #fff; border-color: #44475b; }
+.index-dropdown-wrap { position: relative; margin-left: auto; }
+.index-tab { display: flex; align-items: center; }
+.index-dropdown {
+  position: absolute; right: 0; top: calc(100% + 6px);
+  background: #fff; border: 1px solid #e8e9eb; border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1); z-index: 50; min-width: 160px;
+}
+.index-option {
+  padding: 10px 16px; font-size: 13px; cursor: pointer;
+  color: #44475b; transition: background 0.1s;
+}
+.index-option:hover { background: #f5f6fb; }
+.index-option.selected { color: #6c63ff; font-weight: 600; }
+.sector-table { background: #fff; border: 1px solid #e8e9eb; border-radius: 12px; overflow: hidden; }
+.sector-thead {
+  display: grid; grid-template-columns: 2fr 2fr 1fr;
+  padding: 10px 18px; background: #f8f9fb;
+  border-bottom: 1px solid #e8e9eb;
+  font-size: 11px; font-weight: 600; color: #7b809a;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.sector-row {
+  display: grid; grid-template-columns: 2fr 2fr 1fr;
+  padding: 13px 18px; border-bottom: 1px solid #f5f6f9;
+  align-items: center; transition: background 0.1s;
+}
+.sector-row:last-child { border-bottom: none; }
+.sector-row:hover { background: #fafbff; }
+.sector-name { font-size: 13.5px; color: #44475b; }
+.sector-bar-wrap { display: flex; align-items: center; gap: 8px; }
+.sector-count { font-size: 12px; color: #7b809a; min-width: 20px; }
+.sector-bar {
+  flex: 1; height: 5px; border-radius: 3px; display: flex; overflow: hidden;
+  background: #f0f1f5;
+}
+.bar-gain { background: #20b08e; border-radius: 3px 0 0 3px; transition: width 0.4s; }
+.bar-loss { background: #eb5b3c; border-radius: 0 3px 3px 0; transition: width 0.4s; }
+.sector-change { font-size: 13px; font-weight: 600; text-align: right; }
+
+/* ── News Cards ── */
+.news-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.news-card {
+  background: #fff; border: 1px solid #e8e9eb; border-radius: 12px;
+  padding: 18px; cursor: pointer; transition: box-shadow 0.15s;
+}
+.news-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+.news-card-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.news-logo-wrap { width: 36px; height: 36px; flex-shrink: 0; }
+.news-logo { width: 36px; height: 36px; border-radius: 8px; object-fit: contain; border: 1px solid #eee; padding: 2px; }
+.news-name-wrap { display: flex; flex-direction: column; gap: 2px; }
+.news-stock-name { font-size: 13px; font-weight: 600; color: #44475b; }
+.news-change { font-size: 12px; font-weight: 600; }
+.news-headline { font-size: 12.5px; color: #7b809a; line-height: 1.5; }
+
+/* ── Investments Widget ── */
+.invest-widget {}
+.invest-total { margin-bottom: 14px; }
+.invest-label-sm { font-size: 11px; color: #7b809a; font-weight: 500; margin-bottom: 4px; }
+.invest-big-num { font-size: 22px; font-weight: 700; color: #44475b; margin-bottom: 6px; }
+.invest-tag {
+  display: inline-flex; align-items: center; gap: 3px;
+  font-size: 12px; font-weight: 600; background: #e6f8f3;
+  color: #20b08e; padding: 4px 10px; border-radius: 20px;
+}
+.invest-divider { border: 0; border-top: 1px solid #f0f1f5; margin: 14px 0; }
+.invest-row { display: flex; gap: 12px; }
+.invest-col { flex: 1; }
+.invest-num { font-size: 14px; font-weight: 600; color: #44475b; margin-top: 3px; }
+.invest-segment { margin: 10px 0; }
+.invest-seg-header {
+  display: flex; align-items: center; gap: 7px;
+  margin-bottom: 7px;
+}
+.seg-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.equity-dot { background: #6c63ff; }
+.fno-dot { background: #20b08e; }
+.seg-label { font-size: 13px; font-weight: 600; color: #44475b; }
+.seg-period { font-size: 11px; color: #7b809a; margin-left: auto; }
+.invest-seg-details { display: flex; gap: 10px; background: #f8f9fb; border-radius: 8px; padding: 10px 12px; }
+.seg-item { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+.invest-footer { margin-top: 14px; }
+.invest-roi-badge {
+  display: inline-block; font-size: 11px; font-weight: 700;
+  background: linear-gradient(90deg, #6c63ff22, #20b08e22);
+  color: #44475b; padding: 5px 12px; border-radius: 20px;
+  border: 1px solid #e8e9eb;
+}
+
+/* ── Trading Screens Widget ── */
+.trading-list { display: flex; flex-direction: column; gap: 0; }
+.trading-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 11px 0; border-bottom: 1px solid #f5f5f8; cursor: pointer;
+  transition: background 0.1s;
+}
+.trading-item:last-child { border-bottom: none; }
+.trading-item:hover { background: #fafbff; margin: 0 -22px; padding: 11px 22px; }
+.trading-left { display: flex; align-items: center; gap: 10px; }
+.trading-signal-badge { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; }
+.trading-label { font-size: 13px; color: #44475b; }
+.trading-count {
+  font-size: 12px; font-weight: 600; color: #7b809a;
+  background: #f0f1f5; padding: 2px 8px; border-radius: 10px;
+}
+
+/* ── Top Movers Table ── */
+.mover-table {
+  background: #fff; border: 1px solid #e8e9eb; border-radius: 12px;
+  overflow: hidden;
+}
+.mover-thead {
+  display: grid;
+  grid-template-columns: 2fr 100px 1.4fr 1fr 80px;
+  padding: 9px 18px; background: #f8f9fb;
+  border-bottom: 1px solid #e8e9eb;
+  font-size: 11px; font-weight: 600; color: #7b809a;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.mover-row {
+  display: grid;
+  grid-template-columns: 2fr 100px 1.4fr 1fr 80px;
+  padding: 13px 18px; border-bottom: 1px solid #f5f6f9;
+  align-items: center; transition: background 0.1s; gap: 8px;
+}
+.mover-row:last-child { border-bottom: none; }
+.mover-row:hover { background: #fafbff; }
+.mover-row.skeleton { gap: 8px; }
+.mover-company { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.mover-logo {
+  width: 34px; height: 34px; border-radius: 8px; flex-shrink: 0;
+  object-fit: contain; border: 1px solid #eee; padding: 2px;
+}
+.mover-name { font-size: 13.5px; font-weight: 500; color: #44475b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mover-chart { display: flex; align-items: center; justify-content: center; }
+.mover-price-col { display: flex; flex-direction: column; gap: 2px; }
+.mover-price { font-size: 14px; font-weight: 600; color: #44475b; }
+.mover-change { font-size: 12px; font-weight: 500; }
+.mover-volume { font-size: 13px; color: #7b809a; }
+.mover-actions { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
+.mover-btn {
+  background: none; border: none; cursor: pointer;
+  color: #bbb; padding: 4px; border-radius: 4px; transition: color 0.15s, background 0.15s;
+  display: flex; align-items: center; justify-content: center;
+}
+.mover-btn:hover { color: #6c63ff; background: #f0f0ff; }
+
+/* ── Tools list full ── */
+.tools-list { display: flex; flex-direction: column; }
+.tool-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 11px 0; border-bottom: 1px solid #f5f5f8; cursor: pointer;
+  transition: background 0.1s;
+}
+.tool-item:last-child { border-bottom: none; }
+.tool-item:hover { background: #fafbff; margin: 0 -22px; padding: 11px 22px; }
+.tool-info { display: flex; align-items: center; gap: 10px; }
+.tool-icon { font-size: 18px; color: #20b08e; }
+.tool-name { font-size: 13.5px; color: #44475b; font-weight: 500; }
+.tool-status {
+  color: #20b08e; font-size: 11px; font-weight: 700;
+  background: #e6f7f3; padding: 3px 8px; border-radius: 4px;
+}
+.tool-arrow { font-size: 18px; color: #ccc; }

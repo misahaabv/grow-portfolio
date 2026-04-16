@@ -11,7 +11,17 @@ import { useLiveStocks } from './hooks/useLiveStocks';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('explore');
-  const { tickerData, stocksData, lastUpdated } = useLiveStocks();
+  const {
+    tickerData,
+    allStocks,
+    mostTraded,
+    mtfStocks,
+    intradayStocks,
+    topGainers,
+    topLosers,
+    etfs,
+    lastUpdated,
+  } = useLiveStocks();
 
   return (
     <>
@@ -21,7 +31,16 @@ export default function App() {
 
       <main className="main-container">
         <div className={`tab-content ${activeTab === 'explore' ? 'active' : ''}`} id="view-explore">
-          <ExploreTab stocksData={stocksData} lastUpdated={lastUpdated} />
+          <ExploreTab
+            mostTraded={mostTraded}
+            mtfStocks={mtfStocks}
+            intradayStocks={intradayStocks}
+            topGainers={topGainers}
+            topLosers={topLosers}
+            etfs={etfs}
+            allStocks={allStocks}
+            lastUpdated={lastUpdated}
+          />
         </div>
 
         <div className={`tab-content ${activeTab === 'holdings' ? 'active' : ''}`} id="view-holdings">

@@ -1,16 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-
-const SYMBOLS = [
-  { id: 'NIFTY',                  symbol: '^NSEI' },
-  { id: 'SENSEX',                 symbol: '^BSESN' },
-  { id: 'BANKNIFTY',              symbol: '^NSEBANK' },
-  { id: 'MIDCPNIFTY',             symbol: '^NSMIDCP' },
-  { id: 'FINNIFTY',               symbol: 'NIFTY_FIN_SERVICE.NS' },
-  { id: 'Enviro Infra Engineers', symbol: 'EIEL.NS',       fallbackPrice: 199.17, fallbackChange: '4.80',  fallbackPct: '2.47%' },
-  { id: 'Ather Energy',           symbol: 'ATHERENERG.NS', fallbackPrice: 907.85, fallbackChange: '44.80', fallbackPct: '5.19%' },
-  { id: 'Ola Electric Mobility',  symbol: 'OLAELEC.NS',    fallbackPrice: 38.27,  fallbackChange: '-2.61', fallbackPct: '6.38%' },
-  { id: 'New India Assurance',    symbol: 'NIACL.NS',      fallbackPrice: 171.67, fallbackChange: '15.96', fallbackPct: '10.25%' },
-];
+import { INDEX_SYMBOLS, STOCK_SYMBOLS, ETF_SYMBOLS } from '../data/stockSymbols';
 
 async function fetchSymbol(item) {
   try {
@@ -18,52 +7,56 @@ async function fetchSymbol(item) {
     const res = await fetch(url);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
-    const chartResult = data?.chart?.result;
-    if (chartResult && chartResult.length > 0) {
-      const meta = chartResult[0].meta;
-      const price = meta.regularMarketPrice ?? item.fallbackPrice;
+    const result = data?.chart?.result;
+    if (result && result.length > 0) {
+      const meta = result[0].meta;
+      const price = meta.regularMarketPrice ?? item.fallbackPrice ?? 0;
       const prevClose = meta.chartPreviousClose ?? meta.previousClose ?? price;
       const change = price - prevClose;
       const pct = prevClose !== 0 ? (change / prevClose) * 100 : 0;
       return {
         id: item.id,
+        symbol: item.symbol,
+        isin: item.isin,
         price: price.toFixed(2),
         change: change.toFixed(2),
         percentage: pct.toFixed(2) + '%',
-        symbol: item.symbol,
+        pctNum: pct,
+        volume: meta.regularMarketVolume ?? 0,
       };
     }
   } catch (e) {
     console.warn(`Failed to fetch ${item.symbol}:`, e.message);
   }
-
-  // Fallback data
   return {
     id: item.id,
-    price: item.fallbackPrice?.toFixed(2) ?? (20000 + Math.random() * 1000).toFixed(2),
-    change: item.fallbackChange ?? (Math.random() * 100).toFixed(2),
-    percentage: item.fallbackPct ?? '1.00%',
     symbol: item.symbol,
+    isin: item.isin,
+    price: (item.fallbackPrice ?? 0).toFixed(2),
+    change: '0.00',
+    percentage: '0.00%',
+    pctNum: 0,
+    volume: 0,
   };
 }
 
 export function useLiveStocks() {
   const [tickerData, setTickerData] = useState([]);
-  const [stocksData, setStocksData] = useState([]);
+  const [allStocks, setAllStocks] = useState([]);
+  const [etfs, setEtfs] = useState([]);
   const [lastUpdated, setLastUpdated] = useState(null);
-  const [error, setError] = useState(null);
 
   const fetchAll = useCallback(async () => {
-    try {
-      const results = await Promise.all(SYMBOLS.map(fetchSymbol));
-      setTickerData(results.slice(0, 5));
-      setStocksData(results.slice(5));
-      setLastUpdated(new Date().toLocaleTimeString('en-IN'));
-      setError(null);
-    } catch (e) {
-      console.error('Failed to fetch live stocks:', e);
-      setError(e.message);
-    }
+    const [indices, stocks, etfData] = await Promise.all([
+      Promise.all(INDEX_SYMBOLS.map(fetchSymbol)),
+      Promise.all(STOCK_SYMBOLS.map(fetchSymbol)),
+      Promise.all(ETF_SYMBOLS.map(fetchSymbol)),
+    ]);
+
+    setTickerData(indices);
+    setAllStocks(stocks);
+    setEtfs(etfData);
+    setLastUpdated(new Date().toLocaleTimeString('en-IN'));
   }, []);
 
   useEffect(() => {
@@ -72,5 +65,14 @@ export function useLiveStocks() {
     return () => clearInterval(interval);
   }, [fetchAll]);
 
-  return { tickerData, stocksData, lastUpdated, error };
+  // Derived slices
+  const mostTraded     = allStocks.slice(0, 8);
+  const mtfStocks      = allStocks.slice(4, 8);
+  const intradayStocks = allStocks.slice(8, 12);
+
+  const sorted       = [...allStocks].sort((a, b) => b.pctNum - a.pctNum);
+  const topGainers   = sorted.filter(s => s.pctNum > 0).slice(0, 4);
+  const topLosers    = [...allStocks].sort((a, b) => a.pctNum - b.pctNum).filter(s => s.pctNum < 0).slice(0, 4);
+
+  return { tickerData, allStocks, mostTraded, mtfStocks, intradayStocks, topGainers, topLosers, etfs, lastUpdated };
 }
