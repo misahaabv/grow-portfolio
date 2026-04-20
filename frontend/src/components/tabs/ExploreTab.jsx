@@ -1,7 +1,6 @@
 import { useState, useMemo } from 'react';
 import StockCard from '../ui/StockCard';
 import InvestmentsWidget from '../ui/InvestmentsWidget';
-import HolidayWidget from '../ui/HolidayWidget';
 import ToolsWidget from '../ui/ToolsWidget';
 import TradingScreens from '../ui/TradingScreens';
 import TopMovers from '../ui/TopMovers';
@@ -147,7 +146,6 @@ export default function ExploreTab({ mostTraded, mtfStocks, intradayStocks, topG
         <InvestmentsWidget />
         <ToolsWidget />
         <TradingScreens />
-        <HolidayWidget />
       </div>
     </div>
   );

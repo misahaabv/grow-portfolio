@@ -14,10 +14,9 @@ body { background-color: #f7f8fb; color: #44475b; }
     font-weight: 500; margin-right: 22px; transition: color 0.2s;
 }
 .main-nav a:hover, .main-nav a.active { color: #44475b; }
-.header-center { flex: 1; display: flex; justify-content: center; }
 .search-bar {
     display: flex; align-items: center; background: #f2f3f7;
-    border-radius: 8px; padding: 8px 15px; width: 440px;
+    border-radius: 8px; padding: 8px 15px; width: 380px;
     border: 1px solid transparent; transition: border-color 0.2s;
 }
 .search-bar:focus-within { border-color: #6c63ff; background: #fff; }
@@ -30,8 +29,17 @@ body { background-color: #f7f8fb; color: #44475b; }
     color: #7b809a; font-size: 11px; background: #fff;
     padding: 3px 6px; border-radius: 4px; border: 1px solid #e0e1e5;
 }
-.header-right { display: flex; align-items: center; gap: 22px; }
+.header-right { display: flex; align-items: center; gap: 16px; margin-left: auto; }
 .icon-btn { color: #44475b; cursor: pointer; font-size: 22px; }
+.notif-wrap { position: relative; display: flex; align-items: center; }
+.notif-badge {
+    position: absolute; top: -4px; right: -6px;
+    background: #eb5b3c; color: #fff; font-size: 9px; font-weight: 700;
+    width: 15px; height: 15px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 1.5px solid #fff;
+}
+
 
 /* ── Profile Dropdown ── */
 .profile-container { position: relative; }

@@ -48,7 +48,7 @@ export default function Header({ onTabChange }) {
         </nav>
       </div>
 
-      <div className="header-center">
+      <div className="header-right">
         <div className="search-bar">
           <span className="material-icons search-icon">search</span>
           <input
@@ -59,15 +59,10 @@ export default function Header({ onTabChange }) {
           />
           <span className="search-shortcut">Ctrl+K</span>
         </div>
-      </div>
-
-      <div className="header-right">
-        <button className="terminal-btn" style={{ border: 'none', background: '#f8f9fb', marginRight: 10 }}>
-          <span className="material-icons">vibration</span> Terminal
-        </button>
-        <span className="wallet-balance" style={{ border: 'none', marginRight: 15 }}>915</span>
-        <span className="material-icons icon-btn">search</span>
-        <span className="material-icons icon-btn">notifications_none</span>
+        <div className="notif-wrap">
+          <span className="material-icons icon-btn">notifications_none</span>
+          <span className="notif-badge">1</span>
+        </div>
         
         <div className="profile-container" ref={profileRef}>
           <div

@@ -1,3 +1,8 @@
+import gmdcLogo    from '../assets/GMDC.png';
+import gallantLogo  from '../assets/gallant.png';
+import hdbLogo      from '../assets/HDB financial srvices.png';
+import growwLogo    from '../assets/groww-logo.png';
+
 // ── Index Symbols ──────────────────────────────────────
 export const INDEX_SYMBOLS = [
   { id: 'NIFTY',      symbol: '^NSEI' },
@@ -41,10 +46,49 @@ export const ETF_SYMBOLS = [
   { id: 'CPSE ETF',           symbol: 'CPSEETF.NS',    isin: 'INF732Q01029' },
 ];
 
+// Set of ETF stock IDs — used to show Groww logo for ETF cards
+export const ETF_IDS = new Set(ETF_SYMBOLS.map(e => e.id));
+
+// ── Local logo overrides (keyed by stock id) ───────────
+// These take priority over the Groww CDN for stocks whose CDN logo is missing.
+export const LOCAL_LOGO_MAP = {
+  'GMDC':                 gmdcLogo,
+  'Gallantt Ispat':       gallantLogo,
+  'HDB Financial Services': hdbLogo,
+};
+
+// The Groww logo (used for all ETF cards)
+export { growwLogo };
+
 // ── Logo map (Groww CDN by ISIN) ───────────────────────
 export const LOGO_MAP = {};
 [...STOCK_SYMBOLS, ...ETF_SYMBOLS].forEach(s => {
   if (s.isin) LOGO_MAP[s.symbol] = `https://assets-netstorage.groww.in/stock-assets/logos/${s.isin}.png`;
 });
 
-export const FALLBACK_LOGO = 'https://cdn-icons-png.flaticon.com/512/2942/2942821.png';
+// ── Fallback: letter avatar via UI Avatars ─────────────
+export const FALLBACK_LOGO = 'https://ui-avatars.com/api/?name=S&background=6c63ff&color=fff&size=64&bold=true';
+
+/**
+ * Returns the best logo URL for a given stock.
+ * Priority: local override → Groww CDN (isin) → symbol map → letter avatar
+ */
+export function getStockLogo(stock) {
+  if (LOCAL_LOGO_MAP[stock?.id]) return LOCAL_LOGO_MAP[stock.id];
+  if (ETF_IDS.has(stock?.id)) return growwLogo;
+  if (stock?.isin) return `https://assets-netstorage.groww.in/stock-assets/logos/${stock.isin}.png`;
+  return LOGO_MAP[stock?.symbol] || FALLBACK_LOGO;
+}
+
+/**
+ * Returns a letter-avatar URL for any stock name (used as onError fallback).
+ */
+export function letterAvatar(name = 'S') {
+  const initials = name
+    .split(/\s+/)
+    .map(w => w[0])
+    .slice(0, 2)
+    .join('')
+    .toUpperCase();
+  return `https://ui-avatars.com/api/?name=${encodeURIComponent(initials)}&background=6c63ff&color=fff&size=64&bold=true&rounded=true`;
+}

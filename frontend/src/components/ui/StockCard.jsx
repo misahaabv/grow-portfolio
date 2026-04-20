@@ -1,10 +1,10 @@
 import { formatINR, getChangeClass, formatChange } from '../../utils/format';
-import { LOGO_MAP, FALLBACK_LOGO } from '../../data/stockSymbols';
+import { getStockLogo, letterAvatar } from '../../data/stockSymbols';
 
 export default function StockCard({ stock }) {
   const cls = getChangeClass(stock.change);
   const changeText = formatChange(stock.change, stock.percentage);
-  const logo = LOGO_MAP[stock.symbol] || FALLBACK_LOGO;
+  const logo = getStockLogo(stock);
 
   return (
     <div className="stock-card">
@@ -13,7 +13,7 @@ export default function StockCard({ stock }) {
           src={logo}
           className="company-logo"
           alt={stock.id}
-          onError={e => { e.target.src = FALLBACK_LOGO; }}
+          onError={e => { e.target.onerror = null; e.target.src = letterAvatar(stock.id); }}
         />
         <span className="company-name">{stock.id}</span>
       </div>

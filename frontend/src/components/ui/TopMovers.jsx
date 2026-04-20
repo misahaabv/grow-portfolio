@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { LOGO_MAP, FALLBACK_LOGO } from '../../data/stockSymbols';
+import { getStockLogo, FALLBACK_LOGO, letterAvatar } from '../../data/stockSymbols';
 
 const TABS = ['Gainers', 'Losers', 'Volume shockers'];
 const INDICES = ['NIFTY 100', 'NIFTY 50', 'NIFTY 500', 'NIFTY MIDCAP 150'];
@@ -59,8 +59,9 @@ function fmtVol(v) {
 // ── Stock Row ─────────────────────────────────────────
 function StockRow({ stock }) {
   const isPos = stock.pctNum >= 0;
-  const logo = LOGO_MAP[stock.symbol] || FALLBACK_LOGO;
+  const logo = getStockLogo(stock);
   const changeStr = `${isPos ? '+' : ''}${stock.change} (${isPos ? '+' : ''}${stock.percentage})`;
+
 
   return (
     <div className="mover-row">
@@ -69,7 +70,7 @@ function StockRow({ stock }) {
           src={logo}
           className="mover-logo"
           alt={stock.id}
-          onError={e => { e.target.src = FALLBACK_LOGO; }}
+          onError={e => { e.target.onerror = null; e.target.src = letterAvatar(stock.id); }}
         />
         <span className="mover-name">{stock.id}</span>
       </div>
