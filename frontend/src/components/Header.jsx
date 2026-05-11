@@ -63,15 +63,15 @@ export default function Header({ onTabChange }) {
           <span className="material-icons icon-btn">notifications_none</span>
           <span className="notif-badge">1</span>
         </div>
-        
+
         <div className="profile-container" ref={profileRef}>
           <div
             className="profile-icon"
             onClick={(e) => { e.stopPropagation(); setDropdownOpen(o => !o); }}
           >
             <img
-              src="https://ui-avatars.com/api/?name=Aakash+Mehta&background=6C63FF&color=fff"
-              alt="Aakash Mehta"
+              src="https://ui-avatars.com/api/?name=Shamil+Yaseen+Thangal+A+N&background=6C63FF&color=fff"
+              alt="Shamil Yaseen Thangal A N"
             />
           </div>
 
@@ -79,8 +79,8 @@ export default function Header({ onTabChange }) {
           <div className={`profile-dropdown ${dropdownOpen ? 'active' : ''}`}>
             <div className="profile-dropdown-header">
               <div className="user-meta">
-                <h4>Aakash Mehta</h4>
-                <p>aakashmehta@gmail.com</p>
+                <h4>Shamil Yaseen Thangal A N</h4>
+                <p>shamilyaseen@gmail.com</p>
               </div>
               <span className="material-icons drop-settings-icon" onClick={handleSettingsClick}>settings</span>
             </div>

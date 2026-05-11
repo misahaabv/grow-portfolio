@@ -14,7 +14,7 @@ export const INDEX_SYMBOLS = [
 
 // ── Stock Symbols (Most Traded + MTF + Intraday + Movers pool) ──
 export const STOCK_SYMBOLS = [
-  { id: 'GMDC',               symbol: 'GMDC.NS',       isin: 'INE131E01027' },
+  { id: 'GMDC',               symbol: 'GMDCLTD.NS',    isin: 'INE131E01027' },
   { id: 'Gallantt Ispat',     symbol: 'GALLANTT.NS',   isin: 'INE212I01016' },
   { id: 'Firstsource',        symbol: 'FSL.NS',        isin: 'INE684F01012' },
   { id: 'NLC India',          symbol: 'NLCINDIA.NS',   isin: 'INE589A01014' },
