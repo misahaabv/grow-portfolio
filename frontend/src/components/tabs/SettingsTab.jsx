@@ -82,10 +82,10 @@ export default function SettingsTab() {
       <aside className="settings-sidebar">
         <div className="sidebar-user">
           <img
-            src="https://ui-avatars.com/api/?name=Aakash+Mehta&background=6C63FF&color=fff"
-            alt="Aakash Mehta"
+            src="/profile_photo.jpeg"
+            alt="Shamil Yaseen Thangal A N"
           />
-          <h3>Aakash Mehta</h3>
+          <h3>Shamil Yaseen Thangal A N</h3>
         </div>
         <nav className="sidebar-nav">
           {SIDEBAR_ITEMS.map(item => (

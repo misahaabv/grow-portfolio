@@ -70,7 +70,7 @@ export default function Header({ onTabChange }) {
             onClick={(e) => { e.stopPropagation(); setDropdownOpen(o => !o); }}
           >
             <img
-              src="https://ui-avatars.com/api/?name=Shamil+Yaseen+Thangal+A+N&background=6C63FF&color=fff"
+              src="/profile_photo.jpeg"
               alt="Shamil Yaseen Thangal A N"
             />
           </div>
