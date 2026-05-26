@@ -816,3 +816,122 @@ body { background-color: #f7f8fb; color: #44475b; }
   background: #e6f7f3; padding: 3px 8px; border-radius: 4px;
 }
 .tool-arrow { font-size: 18px; color: #ccc; }
+
+/* ── Annual Report ── */
+.annual-report-container {
+    background: #fff;
+    min-height: 100%;
+    width: 100%;
+    animation: fadeUp 0.3s ease;
+}
+.report-header-banner {
+    background: #111424;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 40px;
+    position: relative;
+    border-left: 8px solid #20b08e;
+}
+.banner-left h2 {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+}
+.banner-left h1 {
+    font-size: 22px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+.banner-left p {
+    font-size: 13px;
+    color: #a0a4b8;
+}
+.banner-right {
+    text-align: right;
+}
+.banner-right h4 {
+    font-size: 15px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+.banner-right p {
+    font-size: 12px;
+    color: #a0a4b8;
+    margin-bottom: 2px;
+}
+.close-report-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+.close-report-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.report-content {
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.report-section-title {
+    font-size: 18px;
+    color: #111424;
+    font-weight: 700;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #111424;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid #e8e9eb;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.metric-card {
+    padding: 24px;
+    border-right: 1px solid #e8e9eb;
+    border-bottom: 1px solid #e8e9eb;
+    background: #fff;
+}
+.metric-card:nth-child(4n) {
+    border-right: none;
+}
+.metric-card:nth-last-child(-n+4) {
+    border-bottom: none;
+}
+.metric-label {
+    font-size: 13px;
+    color: #7b809a;
+    margin-bottom: 8px;
+}
+.metric-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #111424;
+    margin-bottom: 4px;
+}
+.metric-value.positive { color: #20b08e; }
+.metric-value.negative { color: #eb5b3c; }
+.metric-value.blue { color: #4b7bec; }
+.metric-value.orange { color: #fa8231; }
+.metric-sub {
+    font-size: 11px;
+    color: #a0a4b8;
+}

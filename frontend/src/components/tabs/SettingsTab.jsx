@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import AnnualReport from './AnnualReport';
 import growwLogo from '../../assets/groww-logo.png';
 
 const SIDEBAR_ITEMS = [
@@ -67,6 +68,12 @@ export default function SettingsTab() {
   const [activeSidebar, setActiveSidebar] = useState('reports');
   const [selectedReport, setSelectedReport] = useState('Stocks P&L');
   const [selectedYear, setSelectedYear] = useState('Current financial year (2026 - 2027)');
+
+  const [showReport, setShowReport] = useState(false);
+
+  if (showReport) {
+    return <AnnualReport selectedYear={selectedYear} onClose={() => setShowReport(false)} />;
+  }
 
   return (
     <div className="settings-container">
@@ -195,7 +202,7 @@ export default function SettingsTab() {
               </div>
             ))}
           </div>
-          <button className="view-btn">View</button>
+          <button className="view-btn" onClick={() => setShowReport(true)}>View</button>
         </div>
       </aside>
 
