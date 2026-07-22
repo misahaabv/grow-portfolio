@@ -91,7 +91,7 @@ export default function Header({ onTabChange }) {
                   <span className="material-icons">account_balance_wallet</span>
                 </div>
                 <div className="balance-text">
-                  <div>₹1,31,90,750</div>
+                  <div>₹7,31,90,750</div>
                   <div>Stocks, F&amp;O balance</div>
                 </div>
               </div>

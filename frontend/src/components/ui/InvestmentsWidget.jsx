@@ -8,8 +8,8 @@ const EQUITY = {
 };
 const FNO = {
   capital:   1000000,
-  returns:   11872000,
-  returnPct: 1187.2,
+  returns:   71872000,
+  returnPct: 7187.2,
   period:    '2022–2023',
 };
 

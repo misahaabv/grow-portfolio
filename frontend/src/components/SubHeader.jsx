@@ -27,7 +27,7 @@ export default function SubHeader({ activeTab, onTabChange }) {
             <span className="material-icons">terminal</span>
             Terminal
           </button>
-          <div className="wallet-balance">₹1,31,90,750</div>
+          <div className="wallet-balance">₹7,31,90,750</div>
         </div>
       </div>
     </div>
